@@ -1,4 +1,5 @@
 require 'flashdance'
+require 'action_controller_extensions'
 
 ActionController::Base.send :include, Quirkey::Flashdance
 ActionController::Base.before_filter :flash_ahead
