@@ -24,9 +24,20 @@ module Quirkey
       end
 
       def get(name)
-        name = name.to_s
-        raise(NoEntryError, "There is no entry in your flashdance YAML file for #{name}") unless entries.has_key?(name)
-        ERB.new(entries[name]).result(@erb_binding)
+        case name
+        when Array
+          name.collect! {|n| n.to_s }
+          obj = entries
+          name.each do |key|
+            obj = obj.fetch(key, nil) if obj && obj.is_a?(Hash)
+          end
+          entry = obj
+        else
+          name = name.to_s
+          entry = entries[name]
+        end
+        raise(NoEntryError, "There is no entry in your flashdance YAML file for #{name}") unless entry
+        ERB.new(entry).result(@erb_binding)
       end
       
       def entries

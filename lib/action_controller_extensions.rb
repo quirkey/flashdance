@@ -8,8 +8,12 @@ class ActionController::Base
         ac_flash[flash_key] = flashdance(name)
       end
     when Symbol
-      if args[1] && (args[1].is_a?(String) || args[1].is_a?(Symbol))
+      if args[1] && (args[1].is_a?(String) || args[1].is_a?(Symbol) || args[1].is_a?(Array))
         ac_flash[args[0]] = flashdance(args[1])
+      elsif text = flashdance([controller_name, action_name, args[0]]) || text = flashdance([controller_name, action_name])
+        ac_flash[args[0]] = text
+      else
+        ac_flash(*args)
       end
     end
   end

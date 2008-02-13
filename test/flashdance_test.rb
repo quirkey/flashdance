@@ -36,4 +36,9 @@ class FlashdanceTest < Test::Unit::TestCase
     assert_equal "your are an idiot, #{@email}", text
   end
   
+  def test_flashdance_should_get_entry_organized_into_section
+    text = flashdance([:controller, :action])
+    assert_equal "I'm nested", text
+  end
+  
 end
