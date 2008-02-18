@@ -1,5 +1,8 @@
+# app/views/shared/flash.yml
+
 all_is_good: This is great
 this_failed: This failed
 using_erb: your are an idiot, <%= @email %>
-controller:
-  action: I'm nested
+my_controller:
+  my_action:
+    warning: im automatic
