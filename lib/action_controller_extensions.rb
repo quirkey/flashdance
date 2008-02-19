@@ -5,7 +5,8 @@ class ActionController::Base
     case args.first
     when Hash
       args.first.each do |flash_key, name|
-        ac_flash[flash_key] = flashdance(name)
+        text = flashdance([controller_name, action_name, name]) || flashdance(name)
+        ac_flash[flash_key] = name
       end
     when Symbol
       if args[1] && (args[1].is_a?(String) || args[1].is_a?(Symbol) || args[1].is_a?(Array))
