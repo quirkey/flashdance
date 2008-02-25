@@ -15,7 +15,12 @@ module Quirkey
       flash_ahead
       @flashdance_loader.get(name)
     end
-    
+
+    def flashdance!(name)
+      flash_ahead
+      @flashdance_loader.get!(name)
+    end
+
     class Loader
 
       def initialize(erb_binding = nil)
@@ -24,6 +29,18 @@ module Quirkey
       end
 
       def get(name)
+        entry = find(name)
+        return false unless entry
+        ERB.new(entry).result(@erb_binding)
+      end
+      
+      def get!(name)
+        entry = find(name)
+        raise(NoEntryError, "There is no entry in your flashdance YAML file for #{name}") unless entry
+        ERB.new(entry).result(@erb_binding)
+      end
+
+      def find(name)
         case name
         when Array
           name.collect! {|n| n.to_s }
@@ -36,18 +53,17 @@ module Quirkey
           name = name.to_s
           entry = entries[name]
         end
-        raise(NoEntryError, "There is no entry in your flashdance YAML file for #{name}") unless entry
-        ERB.new(entry).result(@erb_binding)
+        entry
       end
-      
+
       def entries
         @entries
       end
-      
+
       def yml_path
         @@yml_path || raise(NoYAMLError, "You must specify a default YAML path with Quirkey::Flashdance.yml_path = ")
       end
-      
+
       def self.yml_path=(path)
         @@yml_path = path
       end
