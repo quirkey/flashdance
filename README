@@ -72,6 +72,10 @@ http://www.quirkey.com/blog/
 Installation
 ============
 
+Latest is the Git on the Hub:
+http://github.com/quirkey/flashdance
+
+From SVN (legacy):
 ./script/plugin install svn://svn.quirkey.com/quirkey_tools/trunk/flashdance
 
 
