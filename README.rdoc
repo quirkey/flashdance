@@ -1,5 +1,4 @@
-Flashdance
-==========
+== Flashdance
 
 Flashdance is a drop in replacement for flash in action controller. It stores all your assorted messages in a single YAML file.
 
@@ -8,18 +7,17 @@ app/views/shared/flash.yml
 
 You can change this with:
 
-Quirkey::Flashdance::Loader.yml_path = File.join(RAILS_ROOT,'app','views','your_folder','your_flash.yml')
+  Quirkey::Flashdance::Loader.yml_path = File.join(RAILS_ROOT,'app','views','your_folder','your_flash.yml')
 
 You can email me at aaron at quirkey for bug reports/comments/suggestions
 
-Example
-=======
+= Example
 
 Flashdance bends a lot of different ways:
 
 At its most unobtrusive:
 
-# in your controller
+  # in your controller
   def update
     # . . . booring part where record gets updated
     flash[:warning] = flashdance(:this_failed) #=> This failed
@@ -53,32 +51,29 @@ So what if your app is huge and you use these flash thingies all over the place?
   
 Flashdance automatically checks for entries nested in the controller/action path where you call it from. And heres where you get splashed with that big bucket of water:
 
-class MyController < ApplicationController
-  # . . . 
+  class MyController < ApplicationController
+    # . . . 
   
-  def my_action
-   # . . . where you dance your heart out
-   flash(:message)
-   # equivalent to flash[:message] = "I'm soaking wet"
+    def my_action
+     # . . . where you dance your heart out
+     flash(:message)
+     # equivalent to flash[:message] = "I'm soaking wet"
+    end
   end
-end
 
 
 Read more:
 http://www.quirkey.com/blog/
 
 
-
-Installation
-============
+= Installation
 
 Latest is the Git on the Hub:
 http://github.com/quirkey/flashdance
 
-From SVN (legacy):
-./script/plugin install svn://svn.quirkey.com/quirkey_tools/trunk/flashdance
-
-
+From Github (legacy):
+  
+  ./script/plugin install git://github.com/quirkey/flashdance.git
 
 
 Copyright (c) 2008 Aaron Quint / Quirkey NYC, LLC. , released under the MIT license
