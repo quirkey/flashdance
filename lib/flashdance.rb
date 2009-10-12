@@ -61,11 +61,11 @@ module Quirkey
       end
 
       def yml_path
-        @@yml_path || raise(NoYAMLError, "You must specify a default YAML path with Quirkey::Flashdance.yml_path = ")
+        @yml_path || raise(NoYAMLError, "You must specify a default YAML path with Quirkey::Flashdance.yml_path = ")
       end
 
       def self.yml_path=(path)
-        @@yml_path = path
+        @yml_path = path
       end
     end
 
